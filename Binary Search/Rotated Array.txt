@@ -1,4 +1,8 @@
 
+Helpful point : Always consider the case of arrays with size 1 and size 2 after coming up with an algorithm in Rotated array
+
+
+
 logN
 
 class Solution {
@@ -10,7 +14,7 @@ public:
         while(low<=high){
             int mid = low+(high-low)/2;
             if (nums[mid]==target){ans= mid;break;}
-           if (nums[low]<=nums[mid]){
+           if (nums[low]<=nums[mid]){                                            // "=" symbol is important her for the case of 2 sized array e.g [3,1]
             if (nums[low]<=target && nums[mid]>target){
                 high=mid-1;
             }
