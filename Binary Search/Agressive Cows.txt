@@ -1,0 +1,49 @@
+
+O(N)log(N)log(K)
+ 
+we can also do it in O(N)(logK) approach- instead of while loop +lowerbound- do a linear seach using a for loop as array is already sorted
+
+class Solution {
+  public:
+    int cow_count(vector<int>&stalls,int dist){
+        int i=0;
+        int n = stalls.size();
+        int count =1;
+        while(i<n){
+            int num = stalls[i]+dist;
+            auto it = lower_bound(stalls.begin(),stalls.end(),num);
+            if (it==stalls.end()){return count;}
+            else{
+                i= it-stalls.begin();
+                count++;
+                
+            }
+        }
+        return count;
+    }
+
+    int aggressiveCows(vector<int> &stalls, int k) {
+    sort(stalls.begin(),stalls.end());
+    int n = stalls.size();
+    int low = 1;
+    int high = stalls[n-1]-stalls[0];
+    int ans = -1;
+    while(low<=high){
+        int mid = low+(high-low)/2;
+        // cout<<"mid "<<mid<<endl;
+        int count = cow_count(stalls,mid);
+        // cout<<"count "<<count<<endl;
+        // if (count==k){}
+        if (count<k){
+             high= mid-1;
+        }
+        else {
+            ans= max(ans,mid);
+            low=mid+1;
+        }
+        
+    }
+    return ans;
+        
+    }
+};
