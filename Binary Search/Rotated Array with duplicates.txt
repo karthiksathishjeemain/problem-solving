@@ -1,6 +1,6 @@
 
-Helpful point : Always consider the case of arrays with size 1 and size 2 after coming up with an algorithm in Rotated array
-
+Helpful point : Always consider the case of arrays with size 1 and size 2 after coming up with an algorithm in Rotated array.
+ {This is almost similar to the roatated array problem}
 class Solution {
 public:
     bool search(vector<int>& nums, int target) {
