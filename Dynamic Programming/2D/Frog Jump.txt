@@ -1,0 +1,61 @@
+2D Dp problem (Even though it seems 1D!!)
+
+
+TC = O N^2logN
+SC = O N^2
+
+
+
+class Solution {
+public:
+    bool solve (int num,int k,map<int,int>mp, int last,vector<vector<int>>&dp){
+        if (k==0)return false;
+        if (mp.find(num)==mp.end())return false;
+        if (num==last)return true;
+        int ind = mp[num];
+        if (dp[ind][k]!=-1)return dp[ind][k];
+        bool one = solve(num+k-1,k-1,mp,last,dp);
+        bool two = solve(num+k,k,mp,last,dp);
+        bool three = solve(num+k+1,k+1,mp,last,dp);
+        cout<<" ind "<<ind<<" k "<<k<<endl;
+        return dp[ind][k]=one||two||three;
+    }
+    bool canCross(vector<int>& stones) {
+        map<int,int>mp;
+
+        int n = stones.size();
+     for (int i=0;i<n;i++){
+        mp[stones[i]]=i;
+     }   
+     int num = stones[1];
+     if (stones[1]-stones[0]!=1)return false;
+    //  vector<vector<int>>dp(n,vector<int>(n,-1));
+    //  return solve(num,1,mp,stones[n-1],dp);
+    vector<vector<bool>>dp(n,vector<bool>(n+1,false));
+    for (int j=1;j<=n-1;j++){
+        dp[n-1][j]=true;
+    }
+    for (int i=n-2;i>0;i--){
+    for (int j=1;j<=i;j++){
+       int num = stones[i];
+       int one = false;
+       int two = false;
+       int three = false;
+       if (mp.find(num+j-1)!=mp.end() && j!=1){
+        int ind=mp[num+j-1];
+        one = dp[ind][j-1];
+       }
+         if (mp.find(num+j)!=mp.end()){
+        int ind=mp[num+j];
+        two = dp[ind][j];
+       }
+         if (mp.find(num+j+1)!=mp.end()){
+        int ind=mp[num+j+1];
+        three = dp[ind][j+1];
+       }
+       dp[i][j]=one||two||three;
+    }}
+    cout<<dp[1][2];
+    return dp[1][1];
+    }
+};
