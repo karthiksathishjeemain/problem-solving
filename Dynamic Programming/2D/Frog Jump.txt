@@ -5,6 +5,8 @@ TC = O N^2logN
 SC = O N^2
 
 
+Leetcode has got a better solution with ON^2 approach- view it for better TC
+
 
 class Solution {
 public:
