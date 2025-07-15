@@ -1,0 +1,5 @@
+The difference between the above 2 problems are:
+Both has two create 2 subsets but one needs to have subsets that are equal in length including negative numbers (bit harder) and 
+the other deals with creating 2 subsets which may be varying in length and only has non negative numbers:
+
+Both try to find the minimum difference between the sums of the 2 subsets generated
