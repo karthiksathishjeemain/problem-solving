@@ -1,0 +1,50 @@
+
+You are given an integer array nums of 2 * n integers. You need to partition nums into two arrays of length n to minimize the absolute difference of the sums of the arrays. To partition nums, put each element of nums into one of the two arrays.
+
+Return the minimum possible absolute difference.
+
+ 
+
+class Solution {
+public:
+    void sumGenerator(vector<int>&nums, int ind, int right, int k, int sum,vector<int>&vec){
+        if (k==0){vec.push_back(sum);return;}
+        if (ind>right)return;
+        sumGenerator(nums, ind+1,right,k-1,sum+nums[ind],vec);
+        sumGenerator(nums,ind+1,right,k,sum,vec);
+    }
+    vector<vector<int>>subsetSumGenerator(vector<int>&nums,int left,int right){
+        int arrlength = right -left +1;
+        vector<vector<int>>big(arrlength+1);
+        for (int i=0;i<=arrlength;i++){
+            vector<int>vec;
+            sumGenerator(nums,left,right,i,0,vec);
+            big[i]=vec;
+        }
+        return big;
+      
+    }
+    int minimumDifference(vector<int>& nums) {
+        
+        int N = nums.size();
+        int n= N/2;
+        auto left = subsetSumGenerator(nums,0,n-1);
+        auto right = subsetSumGenerator(nums,n,N-1);
+        int sum =0;
+        for (int i=0;i<N;i++){
+            sum+=nums[i];
+        }
+        int half = sum/2;
+        int ans = INT_MAX;
+        for (int  i =0;i<=n;i++){
+            auto r = right[n-i];
+            sort(r.begin(),r.end());
+            for (int num : left [i]){
+                int rightsumNeeded = half - num;
+                auto it = lower_bound(r.begin(),r.end(),rightsumNeeded);
+                if(it!=r.end()) ans= min(ans,abs(sum-2*(num+*it)));
+            }
+        }
+        return ans;
+    }
+};
