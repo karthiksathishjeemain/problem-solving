@@ -3,7 +3,9 @@ You are given an integer array nums of 2 * n integers. You need to partition num
 
 Return the minimum possible absolute difference.
 
-This is a better soltion than Usually Recursion
+This is a better soltion than the Usual Recursion (i.e  solve(vector<int>& nums, int sum, int k, int pos))
+
+The TC is O(N 2^(N/2)) for this code
 
 class Solution {
 public:
