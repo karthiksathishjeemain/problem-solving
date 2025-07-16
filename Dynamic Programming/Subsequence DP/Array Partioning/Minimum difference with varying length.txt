@@ -1,6 +1,6 @@
 Your task is to partition this array into two subsets such that the absolute difference between subset sums is minimum.
 
-
+DP map is used here.
 
 
 
