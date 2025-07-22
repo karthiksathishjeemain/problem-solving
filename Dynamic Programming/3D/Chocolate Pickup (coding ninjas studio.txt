@@ -1,3 +1,6 @@
+U can also model the code as a 4D Dp but it is not good as we try to move both alice and bob simultaneusly
+and having i1 and i2 separate for them is not at all necessary as i1 == i2 always
+
 #include <bits/stdc++.h> 
 
 int maximumChocolates(int r, int c, vector<vector<int>> &grid) {
