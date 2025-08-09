@@ -1,0 +1,56 @@
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        queue<vector<int>>q;
+        int row = grid.size();
+        int col = grid[0].size();
+        for (int i=0;i<row;i++){
+            for (int j=0;j<col;j++){
+                if (grid[i][j]==2){
+                    q.push({i,j,0});
+                }
+            }
+        }
+        // vector<vector<int>vis(row,vector<int>(col,0));
+        int maxi=0;
+        while(!q.empty()){
+            vector<int>config = q.front();
+            q.pop();
+            int i = config[0];
+            int j= config[1];
+            int depth=config[2];
+            maxi= max(maxi,depth);
+            if (i+1<row){
+                if (grid[i+1][j]==1){
+                    grid[i+1][j]=2;
+                    q.push({i+1,j,depth+1});
+                }
+            } 
+               if (i-1>=0){
+                if (grid[i-1][j]==1){
+                     grid[i-1][j]=2;
+                    q.push({i-1,j,depth+1});
+                }
+            } 
+               if (j+1<col){
+                if (grid[i][j+1]==1){
+                     grid[i][j+1]=2;
+                    q.push({i,j+1,depth+1});
+                }
+            } 
+               if (j-1>=0){
+                if (grid[i][j-1]==1){
+                     grid[i][j-1]=2;
+                    q.push({i,j-1,depth+1});
+                }
+            } 
+
+        }
+        for (int i=0;i<row;i++){
+            for (int j=0;j<col;j++){
+               if (grid[i][j]==1)return -1;
+            }
+        }
+        return maxi;
+    }
+};
